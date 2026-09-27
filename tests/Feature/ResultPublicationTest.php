@@ -1,0 +1,3 @@
+<?php
+namespace Tests\Feature; use Tests\TestCase; use Illuminate\Foundation\Testing\RefreshDatabase; use App\Models\Examination; use App\Models\User; use App\Services\ResultPublicationService; use App\Enums\ExaminationStatus; use RuntimeException;
+class ResultPublicationTest extends TestCase { use RefreshDatabase; public function test_publish_requires_processing_state():void{$user=User::factory()->create();$exam=Examination::create(['code'=>'EX-001','name'=>'Semester 1','academic_year'=>'2026','term'=>'May','status'=>ExaminationStatus::Open]);$this->expectException(RuntimeException::class);app(ResultPublicationService::class)->publish($exam,$user->id);}}
