@@ -615,9 +615,7 @@ Current endpoints include:
 | `GET` | `/examinations/{examination}/results` | Read published results |
 
 Authentication:
-
-- Browser UI: normal Laravel session authentication.
-- REST API: Laravel Sanctum bearer tokens.
+Not Implemented.
 
 ---
 
@@ -1018,6 +1016,9 @@ Useful commands:
 # Build/start
 
 docker compose up -d --build
+
+# Seed database from dummy data
+docker compose exec app php artisan migrate:fresh --seed
 
 # Application logs
 

@@ -8,8 +8,6 @@ services:
     working_dir: /var/www/html
     ports:
       - "8000:8000"
-    env_file:
-      - .env
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
@@ -41,8 +39,6 @@ services:
     restart: unless-stopped
     working_dir: /var/www/html
     command: php artisan queue:work redis --queue=imports,results,default --tries=3 --timeout=120 --sleep=1
-    env_file:
-      - .env
     environment:
       APP_ENV: local
       APP_DEBUG: "true"
