@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             AssessmentComponentSeeder::class,
             ExaminationSeeder::class,
             StudentSeeder::class,
+            EnrollmentSeeder::class
         ]);
         // User::factory(10)->create();
 

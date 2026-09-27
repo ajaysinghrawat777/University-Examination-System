@@ -9,8 +9,8 @@ class ExaminationSeeder extends Seeder
 {
     public function run(): void
     {
-        $total = 2_000;
-        $chunkSize = 500;
+        $total = 10;
+        $chunkSize = 10;
 
         $faker = fake();
 
