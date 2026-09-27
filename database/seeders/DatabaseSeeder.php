@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             AssessmentComponentSeeder::class,
             ExaminationSeeder::class,
+            ExaminationCourseSeeder::class,
+            ExaminationCourseAssessmentSeeder::class,
             StudentSeeder::class,
             EnrollmentSeeder::class
         ]);

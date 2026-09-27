@@ -51,6 +51,7 @@ done
 echo "PostgreSQL is ready."
 
 php artisan migrate --force
+php artisan optimize:clear
 
 # Execute the Compose command when one is provided. This is important for the
 # queue container; otherwise both app and queue containers would start HTTP.
