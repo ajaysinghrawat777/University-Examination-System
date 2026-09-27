@@ -21,6 +21,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && docker-php-ext-enable redis \
     && rm -rf /var/lib/apt/lists/*
 
+# PHP configuration
+COPY docker/php/php.ini /usr/local/etc/php/conf.d/99-custom.ini
+
 # The Laravel React starter + Wayfinder need PHP and Node in the
 # same build stage because the frontend build may invoke Artisan.
 COPY --from=node:24-bookworm-slim /usr/local /usr/local
