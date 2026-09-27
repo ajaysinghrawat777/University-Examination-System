@@ -52,7 +52,6 @@ RUN composer install \
     --no-interaction \
     --prefer-dist \
     --optimize-autoloader \
-    --no-dev \
     --no-scripts
 
 # Install JS dependencies.
@@ -73,7 +72,7 @@ RUN mkdir -p \
     bootstrap/cache
 
 # Now artisan exists, so package discovery/autoload generation is safe.
-RUN composer dump-autoload --optimize --no-dev
+RUN composer dump-autoload --optimize
 
 # Generate Wayfinder once during the PHP build stage. The Vite plugin is
 # disabled during Docker build via DOCKER_BUILD=true, so Vite will not try
