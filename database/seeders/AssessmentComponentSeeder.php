@@ -10,9 +10,9 @@ class AssessmentComponentSeeder extends Seeder
 {
     public function run(): void
     {
-        $course = DB::table('courses')->first();
+        $courses = DB::table('courses')->pluck('id');
 
-        if (!$course) {
+        if ($courses->isEmpty()) {
             throw new RuntimeException(
                 'No courses found. Please run CourseSeeder first.'
             );
@@ -20,57 +20,46 @@ class AssessmentComponentSeeder extends Seeder
 
         $components = [
             [
-                'code' => 'QUIZ',
-                'name' => 'Quiz',
-            ],
-            [
                 'code' => 'ASSIGNMENT',
                 'name' => 'Assignment',
-            ],
-            [
-                'code' => 'ATTENDANCE',
-                'name' => 'Attendance',
-            ],
-            [
-                'code' => 'MIDTERM',
-                'name' => 'Mid Term Examination',
-            ],
-            [
-                'code' => 'PROJECT',
-                'name' => 'Project',
-            ],
-            [
-                'code' => 'PRACTICAL',
-                'name' => 'Practical Examination',
-            ],
-            [
-                'code' => 'VIVA',
-                'name' => 'Viva Voce',
-            ],
-            [
-                'code' => 'LAB',
-                'name' => 'Laboratory',
-            ],
-            [
-                'code' => 'INTERNAL',
-                'name' => 'Internal Assessment',
             ],
             [
                 'code' => 'FINAL',
                 'name' => 'Final Examination',
             ],
+            [
+                'code' => 'VIVA',
+                'name' => 'Viva Voce',
+            ],
         ];
 
+        $rows = [];
         $now = now();
 
-        foreach ($components as &$component) {
-            $component['course_id'] = $course->id;
-            $component['created_at'] = $now;
-            $component['updated_at'] = $now;
+        foreach ($courses as $courseId) {
+            foreach ($components as $component) {
+                $rows[] = [
+                    'course_id' => $courseId,
+                    'code' => $component['code'],
+                    'name' => $component['name'],
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ];
+            }
         }
 
-        DB::table('assessment_components')->insert($components);
+        foreach (array_chunk($rows, 500) as $chunk) {
+            DB::table('assessment_components')->upsert(
+                $chunk,
+                ['course_id', 'code'],
+                ['name', 'updated_at']
+            );
+        }
 
-        $this->command->info('Inserted 10 assessment components.');
+        $this->command->info(
+            "Inserted/updated {$courses->count()} courses × 3 assessment components = "
+            . count($rows)
+            . ' records.'
+        );
     }
 }
