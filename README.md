@@ -604,7 +604,6 @@ Current endpoints include:
 
 | Method | Endpoint | Purpose |
 |---|---|---|
-| `POST` | `/auth/token` | Issue API token |
 | `GET` | `/programmes` | List active programmes |
 | `GET` | `/students` | Paginated students |
 | `GET` | `/examinations` | List examinations |
