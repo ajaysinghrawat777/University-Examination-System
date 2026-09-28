@@ -6,7 +6,7 @@ Production-oriented backend for university examinations, assessment marks, resul
 
 - **Backend:** Laravel 13, PHP 8.3+
 - **Database:** PostgreSQL
-- **Authentication:** Laravel Sanctum for REST APIs; Laravel session authentication for the Inertia web application
+- **Authentication:** Not Implemented
 - **Frontend:** Inertia + React 19 + TypeScript + Tailwind CSS
 - **Queues / locks / cache:** Redis in production
 - **HTTP/API:** REST API under `/api/v1`
